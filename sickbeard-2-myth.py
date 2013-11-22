@@ -15,6 +15,17 @@ BACKEND_USER='mythtv'
 BACKEND_PASS='' # can often be found in /etc/mythtv/config.xml
 LOG_PATH='/tmp/sickbeard-2-myth.log'
 
+# If desired the above variables can be coped to a file config.py and modified there
+try:
+    import config
+    TV_PATH=config.TV_PATH
+    BACKEND_HOST=config.BACKEND_HOST
+    BACKEND_USER=config.BACKEND_USER
+    BACKEND_PASS=config.BACKEND_PASS
+    LOG_PATH=config.LOG_PATH
+except ImportError:
+    pass
+
 #logging
 FORMAT="%(asctime)-15s : %(message)s"
 logHandler = logging.handlers.RotatingFileHandler(LOG_PATH, maxBytes=2*1024*1024, backupCount=2)
