@@ -7,6 +7,7 @@ import xmltodict
 import socket
 import logging
 import logging.handlers
+import subprocess
 
 # This folder needs to be added to new myth storage group called Links
 TV_PATH="/myth/tv_downloaded/"
@@ -33,6 +34,12 @@ logHandler.setFormatter(logging.Formatter(FORMAT))
 logger = logging.getLogger('log')
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logHandler)
+
+# First off, tell mythvideo to do a video scan. This doesn't relate the getting the video into recordings at all, it needs doing anyway for the video list though
+try:
+    subprocess.call(["mythutil", "--scanvideos"])
+except Exception:
+    pass
 
 try:
     # Expects to be run as extra_script from sickbeard
